@@ -1,0 +1,214 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+body {
+    /* font-family: "Bebas Neue"; */
+    font-family: "Crimson Pro", serif;
+}
+
+button {
+    font-family: "Crimson Pro", serif;
+}
+
+input {
+    background-color: #eaeaea;
+    border-color: #aeaeae;
+}
+
+nav {
+    font-family: "Crimson Pro", serif;
+    font-size: 1.125rem;
+    color: black;
+}
+
+textarea {
+    resize: none;
+}
+
+.logo {
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.caption {
+    font-family: "Bebas Neue";
+    font-size: 5rem;
+    text-align: center;
+}
+
+.card {
+    border-radius: 15px;
+    background-color: #c4c4c4;
+    margin: auto;
+}
+
+.card-login {
+    width: 500px;
+}
+
+.card-register {
+    width: 800px;
+}
+
+.w-50 {
+    max-width: 50%;
+}
+
+.p-20 {
+    padding: 20px;
+}
+
+.landing-input {
+    font-size: 1.5rem;
+}
+
+.register-input {
+    font-size: 1.5rem;
+}
+
+.font-size-1 {
+    font-size: 1rem;
+}
+
+.font-size-2 {
+    font-size: 1.5rem;
+}
+
+.landing-input input {
+    font-family: "Crimson Pro", serif;
+    font-size: 1rem;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.register-input input {
+    font-family: "Crimson Pro", serif;
+    font-size: 1rem;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.landing-input button {
+    font-size: 1.5rem;
+    width: 150px;
+    margin: 0 10px;
+}
+
+.register-input button {
+    font-size: 1.5rem;
+}
+
+.label-login {
+    width: 30%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.label-profile {
+    width: 30%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.spacer-b-10 {
+    margin-bottom: 10px;
+}
+
+.spacer-b-20 {
+    margin-bottom: 20px;
+}
+
+.spacer-b-30 {
+    margin-bottom: 30px;
+}
+
+.spacer-t-10 {
+    margin-top: 10px;
+}
+
+.spacer-t-20 {
+    margin-top: 20px;
+}
+
+.spacer-t-30 {
+    margin-top: 30px;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.btn {
+    border-radius: 10px;
+    border-color: #aeaeae;
+    background-color: #eaeaea;
+}
+
+.btn-emphasis {
+    border-color: #2b99ff;
+    border-radius: 10px;
+    background-color: #78beff;
+    color: #ffffff;
+}
+
+.page-title {
+    font-family: "Bebas Neue";
+    font-size: 5rem;
+    text-align: center;
+}
+
+.profilePicture {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.outline {
+    border-radius: 5px;
+    border: 1px solid #aeaeae;
+    background-color: #eaeaea;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.home-title {
+    font-family: "Bebas Neue";
+    font-size: 5rem;
+}
+
+#preview-profile-picture {
+    width: 100%;
+    border: 1px solid #aeaeae;
+    border-radius: 5px;
+}
+
+#display-profile-picture {
+    width: 100%;
+    border: 1px solid #aeaeae;
+    border-radius: 5px;
+}
+
+#remember {
+    font-size: 1rem;
+    height: 1em;
+    padding: 0;
+    margin-left: -2em;
+}
