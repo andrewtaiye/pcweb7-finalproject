@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\AssessmentController;
 
 /*
@@ -24,18 +24,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/home/{role}', [HomeController::class, 'roleSelect'])->name('roleSelect');
+Route::get('/home/{roleId}', [HomeController::class, 'roleSelect'])->name('roleSelect');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/profile/create', [ProfileController::class, 'create'])->name('profile.create');
 Route::post('/profile/postCreate', [ProfileController::class, 'postCreate'])->name('profile.postCreate');
-Route::post('/profile/{user_id}/postEdit', [ProfileController::class, 'postEdit'])->name('profile.postEdit');
+Route::post('/profile/postEdit', [ProfileController::class, 'postEdit'])->name('profile.postEdit');
 
-Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
-Route::post('/role/postCreate', [RoleController::class, 'postCreate'])->name('role.postCreate');
-Route::get('/role/{user_id}/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
-Route::post('/role/{user_id}/{oldRole}/postEdit', [RoleController::class, 'postEdit'])->name('role.postEdit');
+Route::get('/userRole/create', [UserRoleController::class, 'create'])->name('userRole.create');
+Route::post('/userRole/postCreate', [UserRoleController::class, 'postCreate'])->name('userRole.postCreate');
+Route::get('/userRole/{roleId}/edit', [UserRoleController::class, 'edit'])->name('userRole.edit');
+Route::post('/userRole/{roleId}/postEdit', [UserRoleController::class, 'postEdit'])->name('userRole.postEdit');
+Route::post('/userRole/{roleId}/delete', [UserRoleController::class, 'delete'])->name('userRole.delete');
 
-Route::get('/{role}/assessment/create', [AssessmentController::class, 'create'])->name('assessment.create');
-Route::post('/{role}/assessment/postCreate', [AssessmentController::class, 'postCreate'])->name('assessment.postCreate');
-Route::post('/assessment/{user_id}/{role}/{assessment}/postEdit', [AssessmentController::class, 'postEdit'])->name('assessment.postEdit');
+Route::get('/assessment/{roleId}/create', [AssessmentController::class, 'create'])->name('assessment.create');
+Route::post('/assessment/{roleId}/postCreate', [AssessmentController::class, 'postCreate'])->name('assessment.postCreate');
+Route::get('/assessment/{roleId}/{assessmentId}/edit', [AssessmentController::class, 'edit'])->name('assessment.edit');
+Route::post('/assessment/{roleId}/{assessmentId}/postEdit', [AssessmentController::class, 'postEdit'])->name('assessment.postEdit');
+Route::post('/assessment/{roleId}/{assessmentId}/delete', [AssessmentController::class, 'delete'])->name('assessment.delete');

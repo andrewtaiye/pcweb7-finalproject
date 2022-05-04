@@ -7,13 +7,13 @@
             Add New Assessment
         </div>
         <div class="card p-20 row col justify-content-center">
-            <form method="post" enctype="multipart/form-data" action="{{ route('assessment.postCreate', ['role' => $role]) }}">
+            <form method="post" enctype="multipart/form-data" action="{{ route('assessment.postCreate', ['roleId' => $selectedRole->id]) }}">
                 @csrf
 
                 <div class="row d-flex align-items-center spacer-b-10">
                     <label class="col-2 form-label font-size-2 text-end">Role:</label>
                     <div class="col-4">
-                        <input class="form-control font-size-1" type="text" name="inputAssessmentRole" id="inputAssessmentRole" value="{{ $role }}" readonly>
+                        <input class="form-control font-size-1" type="text" name="inputAssessmentRole" id="inputAssessmentRole" value="{{ $selectedRole->role }}" readonly>
                     </div>
                     <label class="col-3 form-label font-size-2 text-end">Assessment No.:</label>
                     <div class="col-3">

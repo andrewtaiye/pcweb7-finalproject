@@ -63,10 +63,8 @@
                     </div>
 
                     <div class="row mb-0">
-                        <div class="row col-md-6 justify-content-center">
-                            <button type="submit" class="w-50 btn-emphasis">
-                                {{ __('Register') }}
-                            </button>
+                        <div class="row justify-content-center">
+                            <button type="submit" class="font-size-1 w-25 btn-emphasis">{{ __('Register') }}</button>
                         </div>
                     </div>
                 </form>

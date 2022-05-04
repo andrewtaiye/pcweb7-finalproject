@@ -9,7 +9,7 @@
 
         <!-- for profile details -->
         <div class="card p-20 col-xl-10 col-xxl-9">
-            <form method="post" enctype="multipart/form-data" action="{{ route('profile.postEdit', ['user_id' => $profile->user_id]) }}">
+            <form method="post" enctype="multipart/form-data" action="{{ route('profile.postEdit') }}">
                 @csrf
                 <div class="register-input">
                     <div class="row justify-center spacer-b-10">
@@ -65,37 +65,41 @@
                     </div>
 
                     <div class="row justify-content-center">
-                        <button type="submit" class="w-25 d-flex align-items-center justify-content-center btn spacer-t-10">Update</button>
+                        <button type="submit" class="btn spacer-t-20 w-auto font-size-1">Update</button>
                     </div>
                 </div>
             </form>
         </div>
 
         <div class="row col-xl-10 col-xxl-9 justify-content-center spacer-t-20">
-            <table class="table table-striped border" id="tableDisplayRoles">
+            @if ($userRoleArray->isEmpty())
+                <button type="button" onclick="window.location.href='{{ route('userRole.create') }}'" class="btn btn-emphasis spacer-b-20 w-auto font-size-1">Add New Role</button>
+            @endif
+            <table class="table table-striped align-middle border" id="tableDisplayRoles">
                 <tr>
-                    <th>Role</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Approval Date</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th class="">Role</th>
+                    <th class="w-15">Start Date</th>
+                    <th class="w-15">End Date</th>
+                    <th class="w-15">Approval Date</th>
+                    <th class="w-10 text-center">Edit</th>
+                    <th class="w-10 text-center">Delete</th>
                 </tr>
-                <!-- @if ($roleArray == "")
-                    There is no rolearray
-                @else
-                    There is a rolearray
-                    {{ $roleArray }}
-                @endif -->
+                @if ($userRoleArray->isEmpty())
+                    <tr>
+                        <th colspan="6">
+                            <p class="text-center my-0">No roles added</p>
+                        </th>
+                    </tr>
+                @endif
 
-                @foreach ($roleArray as $arrayRow)
+                @foreach ($userRoleArray as $arrayRow)
                     <tr>
                         <td>{{ $arrayRow->role }}</td>
                         <td>{{ $arrayRow->roleStartDate }}</td>
                         <td>{{ $arrayRow->roleEndDate }}</td>
                         <td>{{ $arrayRow->roleApprovalDate }}</td>
-                        <td><button type="button" class="btn" onclick="window.location.href='{{ route('role.edit', ['user_id' => $arrayRow->user_id, 'role' => $arrayRow->role]) }}'">Edit</button></td>
-                        <td><button type="button" class="btn" onclick="">Delete</button></td>
+                        <td class="text-center"><button type="button" class="btn w-100" onclick="window.location.href='{{ route('userRole.edit', ['roleId' => $arrayRow->rId]) }}'">Edit</button></td>
+                        <td class="text-center"><form method="post">@csrf<button type="submit" class="btn w-100" onclick="return confirm('Confirm delete role?')" formaction="{{ route('userRole.delete', ['roleId' => $arrayRow->rId]) }}">Delete</button></form</td>
                     </tr>
                 @endforeach
             </table>

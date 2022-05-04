@@ -25,16 +25,16 @@
     <body class="antialiased">
         <main>
             <div class="container">
-                <div class="logo">
-                    <img src="{{ asset('img/logo-short.svg') }}" width="100%"/>
+                <div class="row justify-content-center mt-5">
+                    <img src="{{ asset('img/logo-short.svg') }}" class="col-md-6"/>
                 </div>
                 <div class="caption">
                     Trainee Assessment Portal
                 </div>
-                <div class="row">
-                    <div class="card col-md-10 col-lg-8 col-xl-6 p-20 landing-input">
-                        <form method="POST" action="{{ route('login') }}">
-                        @csrf
+                <form method="POST" action="{{ route('login') }}">
+                @csrf
+                    <div class="row">
+                        <div class="card col-md-10 col-lg-8 col-xl-6 p-20 font-size-2 justify-content-center">
 
                             <div class="form-group row align-items-center">
                                 <label for="email" class="col-md-4 col-form-label label-login">{{ __('Email: ') }}</label>
@@ -65,26 +65,27 @@
                             </div>
 
                             <div class="row align-items-center">
-                                <label class="form-check-label label-login" for="remember">
+                                <label class="form-check-label label-login col-xs-4" for="remember">
                                     {{ __('Remember Me') }}
                                 </label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row mb-0 spacer-t-20">
+                            <div class="row mb-0 spacer-t-20 justify-content-center">
                                 <div class="row justify-content-center">
-                                    <button type="submit" class="btn-emphasis d-flex justify-content-center align-items-center">{{ __('Login') }}</button>
-                                    <button type="button" class="btn d-flex justify-content-center align-items-center" onclick="window.location.href='{{ route('register') }}'">{{ __('Register') }}</button>
+                                    <button type="submit" class="btn-emphasis w-25 mx-2 font-size-1">{{ __('Login') }}</button>
+                                    <button type="button" class="btn w-25 mx-2 font-size-1" onclick="window.location.href='{{ route('register') }}'">{{ __('Register') }}</button>
                                 </div>
                             </div>
-                        </form>
+
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </main>
     </body>

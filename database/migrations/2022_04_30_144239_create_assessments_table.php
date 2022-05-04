@@ -14,8 +14,8 @@ class CreateAssessmentsTable extends Migration
     public function up()
     {
         Schema::create('assessments', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable(false);
-            $table->string('role')->nullable(false);
+            $table->id();
+            $table->unsignedBigInteger('userRoleId')->nullable(false);
             $table->unsignedTinyInteger('assessmentNumber')->nullable(false);
             $table->string('instructor')->nullable(false);
             $table->date('assessmentDate')->nullable(false);
@@ -34,12 +34,11 @@ class CreateAssessmentsTable extends Migration
             $table->unsignedTinyInteger('i')->nullable(false);
             $table->unsignedTinyInteger('j')->nullable(false);
             $table->boolean('assessmentSafety')->nullable(false);
+            $table->unsignedTinyInteger('assessmentGrade')->nullable(false);
             $table->string('assessmentRemarks', 1000)->nullable(false);
             $table->timestamps();
 
-            $table->primary(['user_id', 'role', 'assessmentNumber']);
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('role')->references('role')->on('roles')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('userRoleId')->references('id')->on('userRoles')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

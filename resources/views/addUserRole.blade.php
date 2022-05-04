@@ -7,13 +7,18 @@
             Add New Role
         </div>
         <div class="card p-20 col-sm-9">
-            <form method="post" enctype="multipart/form-data" action="{{ route('role.postCreate') }}">
+            <form method="post" enctype="multipart/form-data" action="{{ route('userRole.postCreate') }}">
                 @csrf
 
                 <div class="row d-flex align-items-center spacer-b-10">
                     <label class="col-3 form-label font-size-2 text-end">Role:</label>
                     <div class="col-9">
-                        <input class="form-control font-size-1" type="text" name="inputRole" id="inputRole" autofocus required>
+                        <select class="form-select font-size-1" name="inputRoleId" id="inputRoleId" required>
+                                <option disabled selected>Select a role</option>
+                            @foreach ($roleList as $role)
+                                <option value="{{ $role->id }}">{{ $role->role }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

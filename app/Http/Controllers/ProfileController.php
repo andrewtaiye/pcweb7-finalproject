@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 Use Illuminate\Support\Facades\Storage;
 use App\Models\Profile;
-use App\Models\Role;
+use App\Models\UserRole;
 
 class ProfileController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
-        $roleArray = Role::where('user_id', $user->id)->orderby('role', 'asc')->get();
-        
+        $profile = Profile::where('userId', $user->id)->first();
+        $userRoleArray = UserRole::leftJoin('roles', 'roleId', '=', 'roles.id')->select('userroles.*', 'roles.id as rId', 'roles.role')->where('userId', $user->id)->orderby('roleId', 'asc')->get();
+
         return view('profile', [
             'user' => $user,
             'profile' => $profile,
-            'roleArray' => $roleArray,
+            'userRoleArray' => $userRoleArray,
         ]);
     }
 
@@ -40,8 +40,7 @@ class ProfileController extends Controller
 
         $user = Auth::user();
         $profile = new Profile();
-        $profile->user_id = $user->id;
-        $profile->fullName = $user->name;
+        $profile->userId = $user->id;
         $profile->dateOfBirth = request('inputDob');
         $profile->idNumber = request('inputId');
         $profile->dateAccepted = request('inputDateAccepted');
@@ -56,7 +55,7 @@ class ProfileController extends Controller
 
     }
 
-    public function postEdit($user_id) {
+    public function postEdit() {
         $data = request()->validate([
             'inputDob' => ['required'],
             'inputId' => ['required'],
@@ -67,11 +66,11 @@ class ProfileController extends Controller
         ]);
 
         $user = Auth::user();
-        $profile = Profile::where('user_id', $user_id)->first();
+        $profile = Profile::where('userId', $user->id)->first();
 
         if(empty($profile)) {
             $profile = new Profile();
-            $profile->user_id = $user_id;
+            $profile->userId = $user->id;
             $profile->fullName = $user->name;
         }
 

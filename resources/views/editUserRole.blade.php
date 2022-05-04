@@ -7,31 +7,38 @@
             Edit Role
         </div>
         <div class="card p-20 col-sm-9">
-            <form method="post" enctype="multipart/form-data" action="{{ route('role.postEdit', ['user_id' => $user->id, 'oldRole' => $role->role]) }}">
+            <form method="post" enctype="multipart/form-data" action="{{ route('userRole.postEdit', ['roleId' => $userRole->rId]) }}">
                 @csrf
 
                 <div class="row d-flex align-items-center spacer-b-10">
                     <label class="col-3 form-label font-size-2 text-end">Role:</label>
                     <div class="col-9">
-                        <input class="form-control font-size-1" type="text" name="inputRole" id="inputRole" value="{{ $role->role }}" autofocus required>
+                        <select class="form-select font-size-1" name="inputRoleId" id="inputRoleId" required>
+                            <option value="{{ $userRole->rId }}" selected>{{ $userRole->role }}</option>
+                            @foreach ($roleList as $role)
+                                @if ($role->id != $userRole->rId)
+                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
                 <div class="row d-flex align-items-center spacer-b-10">
                     <label class="col-3 form-label font-size-2 text-end">Start Date:</label>
                     <div class="col-3">
-                        <input class="form-control font-size-1" type="date" name="inputStartDate" id="inputStartDate" value="{{ $role->roleStartDate }}"  required>
+                        <input class="form-control font-size-1" type="date" name="inputStartDate" id="inputStartDate" value="{{ $userRole->roleStartDate }}"  required>
                     </div>
                     <label class="col-3 form-label font-size-2 text-end">End Date:</label>
                     <div class="col-3">
-                        <input class="form-control font-size-1" type="date" name="inputEndDate" id="inputEndDate" value="{{ $role->roleEndDate }}">
+                        <input class="form-control font-size-1" type="date" name="inputEndDate" id="inputEndDate" value="{{ $userRole->roleEndDate }}">
                     </div>
                 </div>
 
                 <div class="row d-flex align-items-center">
                     <label class="col-3 form-label font-size-2 text-end">Approval Date:</label>
                     <div class="col-3">
-                        <input class="form-control font-size-1" type="date" name="inputApprovalDate" id="inputApprovalDate" value="{{ $role->roleApprovalDate }}">
+                        <input class="form-control font-size-1" type="date" name="inputApprovalDate" id="inputApprovalDate" value="{{ $userRole->roleApprovalDate }}">
                     </div>
                     <div class="col-3 offset-3">
                         <button type="submit" class="w-100 btn btn-emphasis font-size-1">Submit</button>

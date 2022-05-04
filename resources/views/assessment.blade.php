@@ -12,95 +12,83 @@
                 <p class="font-size-2">Select a role to view past assessments, or add a new role.</p>
 
                 <select id="roleSelectList" name="roleSelectList" class="form-select w-75 font-size-1 text-center" onchange="roleChange()">
-                    <option disabled selected>{{ $selectedRole }}</option>
+                    <option disabled selected>{{ $selectedRole->role }}</option>
                     @foreach ($roleList as $role)
-                        @if ($role == $selectedRole)
+                        @if ($role->rId == $selectedRole->id)
                         @else
-                            <option value="{{ $role }}">{{ $role }}</option>
+                            <option value="{{ $role->rId }}">{{ $role->role }}</option>
                         @endif
                     @endforeach
                 </select>
             </div>
-            <button type="button" onclick="window.location.href='{{ route('role.create') }}'" class="btn spacer-t-20 font-size-1">New Role</button>
+            <button type="button" onclick="window.location.href='{{ route('userRole.create') }}'" class="btn spacer-t-20 font-size-1">New Role</button>
         </div>
     </div>
 
     <!-- assessment table display -->
     <div class="row justify-content-center spacer-t-20">
         <div class="d-flex row py-2 justify-content-between align-items-center border">
-            <p id="roleIndicator" class="font-size-1 fw-bold my-0 w-auto">{{ $selectedRole }}</p>
-            <button type="button" onclick="window.location.href='{{ route('assessment.create', ['role' => $selectedRole]) }}'" class="btn btn-emphasis w-auto">Add Assessment</button>
+            <p id="roleIndicator" class="font-size-1 fw-bold my-0 w-auto">{{ $selectedRole->role }}</p>
+            <button type="button" onclick="window.location.href='{{ route('assessment.create', ['roleId' => $selectedRole->id]) }}'" class="btn btn-emphasis w-auto">Add Assessment</button>
         </div>
-        <table id="tableDisplayAssessments" class="table table-striped border border-top-0">
+        <table id="tableDisplayAssessments" class="table table-striped align-middle border border-top-0">
             <tr>
-                <th>S/N</th>
-                <th>Date</th>
-                <th>Instructor</th>
-                <th>A</th>
-                <th>B</th>
-                <th>C</th>
-                <th>D</th>
-                <th>E</th>
-                <th>F</th>
-                <th>G</th>
-                <th>H</th>
-                <th>I</th>
-                <th>J</th>
-                <th>Safety</th>
-                <th>Grade</th>
+                <th class="w-3 text-center">S/N</th>
+                <th class="w-7">Date</th>
+                <th class="w-10">Instructor</th>
+                <th class="w-3 text-center">A</th>
+                <th class="w-3 text-center">B</th>
+                <th class="w-3 text-center">C</th>
+                <th class="w-3 text-center">D</th>
+                <th class="w-3 text-center">E</th>
+                <th class="w-3 text-center">F</th>
+                <th class="w-3 text-center">G</th>
+                <th class="w-3 text-center">H</th>
+                <th class="w-3 text-center">I</th>
+                <th class="w-3 text-center">J</th>
+                <th class="w-5 text-center">Safety</th>
+                <th class="w-5 text-center">Grade</th>
                 <th>Remarks</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th class="text-center" width="7.5%">Edit</th>
+                <th class="text-center" width="7.5%">Delete</th>
             </tr>
+            @if ($assessmentArray->isEmpty())
+                <tr>
+                    <th colspan="18">
+                        <p class="text-center my-0">No assessments recorded</p>
+                    </th>
+                </tr>
+            @endif
 
             @foreach ($assessmentArray as $arrayRow)
                 <tr>
-                    <td>{{ $arrayRow->assessmentNumber }}</td>
+                    <td class="text-center">{{ $arrayRow->assessmentNumber }}</td>
                     <td>{{ $arrayRow->assessmentDate }}</td>
                     <td>{{ $arrayRow->instructor }}</td>
-                    <td>{{ $arrayRow->a }}</td>
-                    <td>{{ $arrayRow->b }}</td>
-                    <td>{{ $arrayRow->c }}</td>
-                    <td>{{ $arrayRow->d }}</td>
-                    <td>{{ $arrayRow->e }}</td>
-                    <td>{{ $arrayRow->f }}</td>
-                    <td>{{ $arrayRow->g }}</td>
-                    <td>{{ $arrayRow->h }}</td>
-                    <td>{{ $arrayRow->i }}</td>
-                    <td>{{ $arrayRow->j }}</td>
-                    <td>
-                        @if ($arrayRow->assessmentSafety = 1)
+                    <td class="text-center">{{ $arrayRow->a }}</td>
+                    <td class="text-center">{{ $arrayRow->b }}</td>
+                    <td class="text-center">{{ $arrayRow->c }}</td>
+                    <td class="text-center">{{ $arrayRow->d }}</td>
+                    <td class="text-center">{{ $arrayRow->e }}</td>
+                    <td class="text-center">{{ $arrayRow->f }}</td>
+                    <td class="text-center">{{ $arrayRow->g }}</td>
+                    <td class="text-center">{{ $arrayRow->h }}</td>
+                    <td class="text-center">{{ $arrayRow->i }}</td>
+                    <td class="text-center">{{ $arrayRow->j }}</td>
+                    <td class="text-center">
+                        @if ($arrayRow->assessmentSafety == 1)
                             Pass
                         @else
                             Fail
                         @endif
                     </td>
-                    <td>Grade</td>
+                    <td class="text-center">{{ $arrayRow->assessmentGrade }}</td>
                     <td>{{ $arrayRow->assessmentRemarks }}</td>
-                    <td><button type="button" class="btn" onclick="window.location.href='{{ route('role.edit', ['user_id' => $arrayRow->user_id, 'role' => $arrayRow->role]) }}'">Edit</button></td>
-                    <td><button type="button" class="btn" onclick="">Delete</button></td>
+                    <td class="text-center"><button type="button" class="btn w-100" onclick="window.location.href='{{ route('assessment.edit', ['roleId' => $selectedRole->id, 'assessmentId' => $arrayRow->assessmentNumber]) }}'">Edit</button></td>
+                    <td class="text-center"><form method="post">@csrf<button type="submit" class="btn w-100" onclick="return confirm('Confirm delete assessment?')" formaction="{{ route('assessment.delete', ['roleId' => $selectedRole->id, 'assessmentId' => $arrayRow->assessmentNumber]) }}">Delete</button></form</td>
                 </tr>
             @endforeach
-            <tr>
-                <td>1</td>
-                <td>00/00/0000</td>
-                <td>john doe</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>Pass</td>
-                <td>100</td>
-                <td>loren ipsum</td>
-                <td>Edit</td>
-                <td>Delete</td>
-            </tr>
+
         </table>
     </div>
 

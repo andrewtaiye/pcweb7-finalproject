@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="row justify-center">
-                        <button type="submit" class="w-25 d-flex align-items-center justify-content-center btn btn-emphasis spacer-t-10">Submit</button>
+                        <button type="submit" class="w-25 font-size-1 btn btn-emphasis spacer-t-10">Submit</button>
                     </div>
                 </div>
             </form>
