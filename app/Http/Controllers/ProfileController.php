@@ -81,6 +81,8 @@ class ProfileController extends Controller
         $profile->lastDay = request('inputLastDay');
 
         if (request()->has('profilePicture')) {
+            $file = '/public/' . $profile->profilePicture;
+            Storage::delete($file);
             $imagePath = request('profilePicture')->store('profilePictures', 'public');
             $profile->profilePicture = $imagePath;
         }
