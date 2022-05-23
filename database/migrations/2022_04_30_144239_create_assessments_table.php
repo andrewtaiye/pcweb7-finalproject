@@ -38,7 +38,7 @@ class CreateAssessmentsTable extends Migration
             $table->string('assessmentRemarks', 1000)->nullable(false);
             $table->timestamps();
 
-            $table->foreign('userRoleId')->references('id')->on('userRoles')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('userRoleId')->references('id')->on('userroles')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
