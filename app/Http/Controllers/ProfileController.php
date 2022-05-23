@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function index() {
         $user = Auth::user();
         $profile = Profile::where('userId', $user->id)->first();
-        $userRoleArray = UserRole::leftJoin('roles', 'roleId', '=', 'roles.id')->select('userroles.*', 'roles.id as rId', 'roles.role')->where('userId', $user->id)->orderby('roleId', 'asc')->get();
+        $userRoleArray = UserRole::leftJoin('roles', 'roleId', '=', 'roles.id')->select('userRoles.*', 'roles.id as rId', 'roles.role')->where('userId', $user->id)->orderby('roleId', 'asc')->get();
 
         return view('profile', [
             'user' => $user,
